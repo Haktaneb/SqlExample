@@ -1,0 +1,9 @@
+= Project Setup
+
+==== [blue]__Requirements__
+
+* SQL Express 
+
+__[blue]#First Step#__
+
+*Run #SqlSampleCreateDB# in cloned project.

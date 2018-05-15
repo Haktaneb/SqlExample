@@ -6,4 +6,4 @@
 
 __[blue]#First Step#__
 
-*Run #SqlSampleCreateDB# in cloned project.
+* Run #SqlSampleCreateDB# in cloned project.

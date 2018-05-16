@@ -38,7 +38,7 @@ namespace SqlSimple
         public User GetById(int id)
         {
             var user = new User();
-            var house = new House();
+           // var house = new House();
 
             SqlCommand getByIdCommand = new SqlCommand(@"Select 
                                                   U.Id as Id,
@@ -67,11 +67,11 @@ namespace SqlSimple
                 user.Id = sqlReader.GetInt32(IdOrdinal);
                 user.FullName = sqlReader.GetString(nameOrdinal);
                 user.Email = sqlReader.GetString(emailOrdinal);
-                house.Address= sqlReader.GetString(addressOrdinal);
-                house.Id = sqlReader.GetInt32(userIdOrdinal);
+                //house.Address= sqlReader.GetString(addressOrdinal);
+                //house.Id = sqlReader.GetInt32(userIdOrdinal);
 
-                house.User = user;
-                user.Houses.Add(house);
+                //house.User = user;
+                user.Houses.Add(new House { Id = sqlReader.GetInt32(userIdOrdinal), Address = sqlReader.GetString(addressOrdinal) , User = user });
             }
 
             _connection.Close();

@@ -1,7 +1,7 @@
 USE master
 GO
 
-IF db_id('SqlSample') IS NOT NULL BEGIN
+IF db_id('[SqlSample]') IS NOT NULL BEGIN
 
 	PRINT 'Dropping database...'
 
@@ -39,4 +39,14 @@ GO
 
 PRINT 'User Table Created.'
 
+PRINT 'Creating UsersHome Table'
 
+CREATE Table [House]
+(
+  
+   UserId int FOREIGN KEY REFERENCES [User](Id), 
+   Address nvarchar(25) NOT NULL
+   )
+GO
+
+PRINT '[UsersHome] Table Created.'

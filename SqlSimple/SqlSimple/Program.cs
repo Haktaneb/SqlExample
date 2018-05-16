@@ -12,28 +12,54 @@ namespace SqlSimple
 
         public static void Main()
         {
-            var ConnectionString = @"Data Source=.\SQLEXPRESS;Initial Catalog=SqlSample;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+            var ConnectionString = @"Data Source=.\SQLEXPRESS;Initial Catalog=SqlSample;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+
             var cnn = new SqlConnection(ConnectionString);
 
             var userStore = new UserStore(cnn);
 
             var user = new User
             {
-                FullName = "Nasut Evren Kayali",
-                Email = "evren.kayali@readify.net"
+                Houses = new List<House>()
+
             };
 
-            var user2 = new User
+            var house = new House
             {
-                FullName = "Erhan Cakirman",
-                Email = "evren.kayali@readify.net"
+                Address = "asfasf",
+
+                User = new User
+                {
+
+                    FullName = "Nasut Evren Kayali",
+                    Email = "evren.kayali@readify.net",
+
+
+                }
+
+            };
+            var house1 = new House
+            {
+                Address = "cccc",
+
+                User = new User
+                {
+
+                    FullName = "Haktan Enes Biçer",
+                    Email = "evren.kayali@readify.net",
+
+
+                }
+
             };
 
-            userStore.Save(user);
+            user.Houses.Add(house);
+            user.Houses.Add(house1);
+            userStore.Save(house);
 
-            userStore.Save(user2);
+            userStore.Save(house1);
 
-            var firstUser = userStore.GetById(1);
+            var firstUser = userStore.GetById(9);
 
             Console.WriteLine(firstUser);
             Console.WriteLine("******************");

@@ -1,11 +1,12 @@
-﻿using System;
+﻿using SqlSimple.Models;
+using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SqlSimple
+namespace SqlSimple.Repositories
 {
     public class UserStore
     {
@@ -16,18 +17,14 @@ namespace SqlSimple
             _connection = connection;
         }
 
-        public void Save(House house)
+        public void Save(User user)
         {
             var insertCommand = new SqlCommand(@"INSERT INTO 
                                                 [User] (FullName, Email) 
-                                                VALUES (@FullName, @Email);
+                                                VALUES (@FullName, @Email)", _connection);
 
-                                                INSERT INTO [House] (UserId,Address)
-                                                VALUES ((Select Id From [User] where FullName = @FullName),@Address) ", _connection);
-
-            insertCommand.Parameters.AddWithValue("@FullName", house.User.FullName);
-            insertCommand.Parameters.AddWithValue("@Email", house.User.Email);
-            insertCommand.Parameters.AddWithValue("@Address", house.Address);
+            insertCommand.Parameters.AddWithValue("@FullName", user.FullName);
+            insertCommand.Parameters.AddWithValue("@Email", user.Email);
 
             _connection.Open();
 
@@ -38,18 +35,13 @@ namespace SqlSimple
         public User GetById(int id)
         {
             var user = new User();
-           // var house = new House();
 
             SqlCommand getByIdCommand = new SqlCommand(@"Select 
-                                                  U.Id as Id,
-                                                  U.FullName as Name,
-                                                  U.Email as Email , 
-                                                  H.Address as Address,
-                                                  H.UserId as UserId
-                                                  FROM [User] U , [House] H
-                                                  where U.Id = @Id 
-                                                  AND 
-                                                  U.Id =H.UserId ",
+                                                  Id as Id,
+                                                  FullName as Name,
+                                                  Email as Email 
+                                                  FROM [User] 
+                                                  where Id = @id",
                                                   _connection);
 
             getByIdCommand.Parameters.AddWithValue("@Id", id);
@@ -59,19 +51,12 @@ namespace SqlSimple
                 var IdOrdinal = sqlReader.GetOrdinal("Id");
                 var nameOrdinal = sqlReader.GetOrdinal("Name");
                 var emailOrdinal = sqlReader.GetOrdinal("Email");
-                var addressOrdinal = sqlReader.GetOrdinal("Address");
-                var userIdOrdinal = sqlReader.GetOrdinal("UserId");
 
                 sqlReader.Read();
-        
+
                 user.Id = sqlReader.GetInt32(IdOrdinal);
                 user.FullName = sqlReader.GetString(nameOrdinal);
                 user.Email = sqlReader.GetString(emailOrdinal);
-                //house.Address= sqlReader.GetString(addressOrdinal);
-                //house.Id = sqlReader.GetInt32(userIdOrdinal);
-
-                //house.User = user;
-                user.Houses.Add(new House { Id = sqlReader.GetInt32(userIdOrdinal), Address = sqlReader.GetString(addressOrdinal) , User = user });
             }
 
             _connection.Close();
@@ -96,7 +81,7 @@ namespace SqlSimple
                 var nameOrdinal = sqlReader.GetOrdinal("Name");
                 var emailOrdinal = sqlReader.GetOrdinal("Email");
 
-                while(sqlReader.Read())
+                while (sqlReader.Read())
                 {
                     var user = new User();
 
@@ -106,13 +91,10 @@ namespace SqlSimple
 
                     users.Add(user);
                 }
-
             }
 
             _connection.Close();
-
             return users;
-
         }
     }
 }

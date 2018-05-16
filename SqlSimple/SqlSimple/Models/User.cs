@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SqlSimple
+namespace SqlSimple.Models
 {
     public class User
     {
@@ -18,14 +18,4 @@ namespace SqlSimple
             return $"Name = {FullName} || Email = {Email}";
         }
     }
-
-    public class House
-    {
-        public int Id { get; set; }
-        public String Address { get; set; }
-        public User User { get; set; }
-
-       
-    }
-   
 }

@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SqlSimple.Models
 {
@@ -12,10 +8,9 @@ namespace SqlSimple.Models
         public String FullName { get; set; }
         public String Email { get; set; }
         
-
         public override string ToString()
         {
-            return $"Name = {FullName} || Email = {Email}";
+            return $" Id = {Id} || Name = {FullName} || Email = {Email}";
         }
     }
 }

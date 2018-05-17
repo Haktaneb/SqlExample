@@ -17,6 +17,7 @@ namespace SqlSimple.Repositories
             _connection = connection;
         }
 
+        //TODO: If the given user object has already an Id Save method should update that record 
         public void Save(User user)
         {
             var insertCommand = new SqlCommand(@"INSERT INTO 

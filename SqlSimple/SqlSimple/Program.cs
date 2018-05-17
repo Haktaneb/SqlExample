@@ -18,35 +18,28 @@ namespace SqlSimple
             var userStore = new UserStore(cnn);
             var houseStore = new HouseStore(cnn);
 
-
-
             var user = new User
             {
                 FullName = "Nasut Evren Kayali",
                 Email = "evren.kayali@readify.net",
-
             };
+
             var user2 = new User
             {
                 FullName = "Haktan Enes Biçer",
                 Email = "evren.kayali@readify.net",
 
             };
+
             var house = new House
             {
                 Address = "AAAAAAAA",
-
-
             };
+
             var house2 = new House
             {
                 Address = "BBBBBB",
-
-
             };
-
-
-
 
             userStore.Save(user);
             userStore.Save(user2);

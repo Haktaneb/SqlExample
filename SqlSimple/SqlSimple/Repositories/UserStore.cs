@@ -41,7 +41,7 @@ namespace SqlSimple.Repositories
                                                   FullName as Name,
                                                   Email as Email 
                                                   FROM [User] 
-                                                  where Id = @id",
+                                                  where Id = @Id",
                                                   _connection);
 
             getByIdCommand.Parameters.AddWithValue("@Id", id);

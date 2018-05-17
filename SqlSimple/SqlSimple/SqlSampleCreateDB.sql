@@ -39,14 +39,15 @@ GO
 
 PRINT 'User Table Created.'
 
-PRINT 'Creating UsersHome Table'
+PRINT 'Creating [House] Table'
 
 CREATE Table [House]
 (
   
-   UserId int FOREIGN KEY REFERENCES [User](Id), 
+   Id int IDENTITY(1,1) PRIMARY KEY NOT NULL, 
    Address nvarchar(25) NOT NULL
+
    )
 GO
 
-PRINT '[UsersHome] Table Created.'
+PRINT '[House] Table Created.'

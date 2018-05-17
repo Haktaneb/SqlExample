@@ -11,66 +11,65 @@ namespace SqlSimple
 
         public static void Main()
         {
-            var ConnectionString = @"Data Source=.\SQLEXPRESS;Initial Catalog=SqlSample;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+            var ConnectionString = @"Data Source=.\SQLEXPRESS;Initial Catalog=SqlSample;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
 
             var cnn = new SqlConnection(ConnectionString);
 
             var userStore = new UserStore(cnn);
-
-            //TODO: buralari toplarsin. Bir anda cok is bitirmeye calisiyosun yapma. 
-            //TODO: hizli ilerlemenin kimseye bir faydasi yok. Bu gercek bir proje yada odev degil. sikildigin zaman birakabilirsin. 
-            //TODO: Adim adim tasklari takipi et simdilik 
-            
-
-            //var user = new User
-            //{
-            //    Houses = new List<House>()
-
-            //};
-
-            //var house = new House
-            //{
-            //    Address = "asfasf",
-
-            //    User = new User
-            //    {
-
-            //        FullName = "Nasut Evren Kayali",
-            //        Email = "evren.kayali@readify.net",
+            var houseStore = new HouseStore(cnn);
 
 
-            //    }
 
-            //};
-            //var house1 = new House
-            //{
-            //    Address = "cccc",
+            var user = new User
+            {
+                FullName = "Nasut Evren Kayali",
+                Email = "evren.kayali@readify.net",
 
-            //    User = new User
-            //    {
+            };
+            var user2 = new User
+            {
+                FullName = "Haktan Enes Biçer",
+                Email = "evren.kayali@readify.net",
 
-            //        FullName = "Haktan Enes Biçer",
-            //        Email = "evren.kayali@readify.net",
+            };
+            var house = new House
+            {
+                Address = "AAAAAAAA",
 
 
-            //    }
+            };
+            var house2 = new House
+            {
+                Address = "BBBBBB",
 
-            //};
 
-            //user.Houses.Add(house);
-            //user.Houses.Add(house1);
-            //userStore.Save(house);
+            };
 
-            //userStore.Save(house1);
 
-            //var firstUser = userStore.GetById(9);
 
-            //Console.WriteLine(firstUser);
-            //Console.WriteLine("******************");
 
-            //var allUsers = userStore.GetAll();
+            userStore.Save(user);
+            userStore.Save(user2);
 
-            //foreach (var u in allUsers) Console.WriteLine(u);
+            houseStore.Save(house);
+            houseStore.Save(house2);
+
+            var firstUser = userStore.GetById(1);
+           
+
+            Console.WriteLine(firstUser);
+            Console.WriteLine("******************");
+            var firstHouse = houseStore.getById(1);
+            Console.WriteLine(firstHouse);
+            Console.WriteLine("******************");
+
+            var allUsers = userStore.GetAll();
+
+            foreach (var u in allUsers) Console.WriteLine(u);
+
+            var allHouses = houseStore.GetAll();
+
+            foreach (var u in allHouses) Console.WriteLine(u);
         }
     }
 }

@@ -10,7 +10,7 @@ namespace SqlSimple.Models
     {
         public int Id { get; set; }
         public String Address { get; set; }
-        public User User { get; set; }
+       
 
     }
 

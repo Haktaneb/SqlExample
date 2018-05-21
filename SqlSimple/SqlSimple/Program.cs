@@ -34,12 +34,22 @@ namespace SqlSimple
             var house = new House
             {
                 Address = "AAAAAAAA",
+                Owner = new User {
+                    FullName = "Nasut Evren Kayali",
+                    Email = "evren.kayali@readify.net",
+                }
             };
 
             var house2 = new House
             {
                 Address = "BBBBBB",
-            };
+                Owner= new User
+                {
+                    FullName = "Haktan Enes Biçer",
+                    Email = "evren.kayali@readify.net",
+
+                }
+        };
 
             userStore.Save(user);
             userStore.Save(user2);

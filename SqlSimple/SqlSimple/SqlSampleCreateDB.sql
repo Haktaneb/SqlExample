@@ -23,31 +23,3 @@ PRINT 'Creating database...'
 CREATE DATABASE [SqlSample]
 PRINT 'Created database.'
 GO
-
-USE [SqlSample];
-GO
-
-exec sp_addrolemember 'db_owner', 'NT AUTHORITY\NETWORK SERVICE';
-GO
-
-PRINT 'Creating User Table.'
-CREATE TABLE [User]  
-   (Id int IDENTITY(1,1) PRIMARY KEY NOT NULL,  
-    FullName nvarchar(25) NOT NULL,  
-    Email nvarchar(30))  
-GO
-
-PRINT 'User Table Created.'
-
-PRINT 'Creating [House] Table'
-
-CREATE Table [House]
-(
-  
-   Id int IDENTITY(1,1) PRIMARY KEY NOT NULL, 
-   Address nvarchar(25) NOT NULL
-
-   )
-GO
-
-PRINT '[House] Table Created.'

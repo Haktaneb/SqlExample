@@ -108,6 +108,8 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="SqlSampleCreateColums.sql" />
+    <Content Include="SqlSampleCreateTables.sql" />
     <Content Include="SqlSampleCreateDB.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

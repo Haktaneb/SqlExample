@@ -17,21 +17,49 @@ namespace SqlSimple.Repositories
             _connection = connection;
         }
 
-        //TODO: If the given user object has already an Id Save method should update that record 
+        
         public void Save(User user)
         {
-            var insertCommand = new SqlCommand(@"INSERT INTO 
+            var controlIdCommand = new SqlCommand(@"Select Id 
+                                                    From [User]
+                                                    Where Id = @ıd", _connection);
+
+            controlIdCommand.Parameters.AddWithValue("@Id", user.Id);
+
+            _connection.Open();
+            var result = controlIdCommand.ExecuteReader();
+            if (result == null)
+            {
+                var insertCommand = new SqlCommand(@"INSERT INTO 
                                                 [User] (FullName, Email) 
                                                 VALUES (@FullName, @Email)", _connection);
 
-            insertCommand.Parameters.AddWithValue("@FullName", user.FullName);
-            insertCommand.Parameters.AddWithValue("@Email", user.Email);
+                insertCommand.Parameters.AddWithValue("@FullName", user.FullName);
+                insertCommand.Parameters.AddWithValue("@Email", user.Email);
+                insertCommand.ExecuteNonQuery();
 
-            _connection.Open();
+            }
+            else
+            {
+                var updateCommand = new SqlCommand(@"UPDATE [House] 
+                                                    SET (FullName , Email)
+                                                    VALUES (@Name , @Email) 
+                                                    Where Id = @Id", _connection);
 
-            insertCommand.ExecuteNonQuery();
+                updateCommand.Parameters.AddWithValue("@FullName", user.FullName);
+                updateCommand.Parameters.AddWithValue("@Email", user.Email);
+                updateCommand.Parameters.AddWithValue("@Id", user.Id);
+                updateCommand.ExecuteNonQuery();
+            }
+
+
+
+
+            
 
             _connection.Close();
+
+
         }
         public User GetById(int id)
         {

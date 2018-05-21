@@ -13,18 +13,46 @@ namespace SqlSimple.Repositories
             _connection = connection;
         }
 
-        //TODO: If the given house object has already an Id Save method should update that record 
+       
         public void Save(House house)
         {
-            var insertCommand = new SqlCommand(@"INSERT INTO 
-                                                [House] (Address) 
-                                                VALUES (@Address)", _connection);
+            var controlIdCommand = new SqlCommand(@"Select Id 
+                                                    From [House]
+                                                    Where Id = @ıd", _connection);
+           
 
-            insertCommand.Parameters.AddWithValue("@Address", house.Address);
+            controlIdCommand.Parameters.AddWithValue("@Id", house.Id);
+            
 
             _connection.Open();
 
-            insertCommand.ExecuteNonQuery();
+            
+          var result =  controlIdCommand.ExecuteReader();
+
+            if (result == null)
+            {
+                var insertCommand = new SqlCommand(@"INSERT INTO 
+                                                [House] (Address) 
+                                                VALUES (@Address)", _connection);
+
+                insertCommand.Parameters.AddWithValue("@Address", house.Address);
+                insertCommand.ExecuteNonQuery();
+
+            }
+
+            else
+            {
+                var updateCommand = new SqlCommand(@"UPDATE [House] 
+                                                    SET Address = @add 
+                                                    Where Id = @Id", _connection);
+                updateCommand.Parameters.AddWithValue("@Address", house.Address);
+                updateCommand.Parameters.AddWithValue("@Id", house.Id);
+            }
+
+
+
+
+            
 
             _connection.Close();
 

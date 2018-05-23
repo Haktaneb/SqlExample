@@ -11,8 +11,6 @@ namespace SqlSimple.Models
         public override string ToString()
         {
             return $" Id = {Id} || Address = {Address} || User = {Owner}";
-        }
-        
-        
+        }               
     }
 }

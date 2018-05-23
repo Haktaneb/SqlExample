@@ -2,6 +2,8 @@ USE master
 GO
 
 IF db_id('[SqlSample]') IS NOT NULL BEGIN
+	
+
 
 	PRINT 'Dropping database...'
 

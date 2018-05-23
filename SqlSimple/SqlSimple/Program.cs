@@ -34,7 +34,8 @@ namespace SqlSimple
             var house = new House
             {
                 Address = "AAAAAAAA",
-                Owner = new User {
+                Owner = new User
+                {
                     FullName = "Nasut Evren Kayali",
                     Email = "evren.kayali@readify.net",
                 }
@@ -46,8 +47,7 @@ namespace SqlSimple
                 Owner= new User
                 {
                     FullName = "Haktan Enes Biçer",
-                    Email = "evren.kayali@readify.net",
-
+                    Email = "evren.kayali@readify.net"
                 }
         };
 
@@ -59,7 +59,6 @@ namespace SqlSimple
 
             var firstUser = userStore.GetById(1);
            
-
             Console.WriteLine(firstUser);
             Console.WriteLine("******************");
             var firstHouse = houseStore.getById(1);
@@ -67,11 +66,9 @@ namespace SqlSimple
             Console.WriteLine("******************");
 
             var allUsers = userStore.GetAll();
-
             foreach (var u in allUsers) Console.WriteLine(u);
 
             var allHouses = houseStore.GetAll();
-
             foreach (var u in allHouses) Console.WriteLine(u);
         }
     }

@@ -12,34 +12,20 @@ namespace SqlSimple.Repositories
         {
             _connection = connection;
         }
-
-       
+  
         public void Save(House house)
         {
-            var controlIdCommand = new SqlCommand(@"Select Id 
-                                                    From [House]
-                                                    Where Id = @ıd", _connection);
-           
-
-            controlIdCommand.Parameters.AddWithValue("@Id", house.Id);
-            
-
-            _connection.Open();
-
-            
-          var result =  controlIdCommand.ExecuteReader();
+            var result = getById(house.Id);
+           _connection.Open();
 
             if (result == null)
             {
                 var insertCommand = new SqlCommand(@"INSERT INTO 
                                                 [House] (Address) 
                                                 VALUES (@Address)", _connection);
-
                 insertCommand.Parameters.AddWithValue("@Address", house.Address);
                 insertCommand.ExecuteNonQuery();
-
             }
-
             else
             {
                 var updateCommand = new SqlCommand(@"UPDATE [House] 
@@ -48,14 +34,7 @@ namespace SqlSimple.Repositories
                 updateCommand.Parameters.AddWithValue("@Address", house.Address);
                 updateCommand.Parameters.AddWithValue("@Id", house.Id);
             }
-
-
-
-
-            
-
             _connection.Close();
-
         }
         public House getById(int id)
         {
@@ -63,20 +42,15 @@ namespace SqlSimple.Repositories
             SqlCommand getByıDCommand = new SqlCommand(@"Select Address
                                                          FROM [House]
                                                          where Id = @Id", _connection);
-
             getByıDCommand.Parameters.AddWithValue("@Id", id);
-
             _connection.Open();
-
             using (var reader = getByıDCommand.ExecuteReader())
             {
                 var addressOrdinal = reader.GetOrdinal("Address");
                 reader.Read();
                 house.Address = reader.GetString(addressOrdinal);
             }
-
-            _connection.Close();
-
+           _connection.Close();
             return house;
         }
         public List<House> GetAll()
@@ -85,7 +59,6 @@ namespace SqlSimple.Repositories
             SqlCommand getAllcommand = new SqlCommand(@"Select *
                                                        From [House]", _connection);
             _connection.Open();
-
             using (var reader = getAllcommand.ExecuteReader())
             {
                 var addressOrdinal = reader.GetOrdinal("Address");
@@ -93,10 +66,8 @@ namespace SqlSimple.Repositories
                 while (reader.Read())
                 {
                     var houses = new House();
-
                     houses.Id = reader.GetInt32(IdOrdinal);
                     houses.Address = reader.GetString(addressOrdinal);
-
                     house.Add(houses);
                 }
             }

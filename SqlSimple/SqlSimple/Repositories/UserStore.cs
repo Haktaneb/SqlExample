@@ -16,18 +16,13 @@ namespace SqlSimple.Repositories
         {
             _connection = connection;
         }
-
-        
+      
         public void Save(User user)
         {
-            var controlIdCommand = new SqlCommand(@"Select Id 
-                                                    From [User]
-                                                    Where Id = @ıd", _connection);
 
-            controlIdCommand.Parameters.AddWithValue("@Id", user.Id);
+            var result = GetById(user.Id);
 
-            _connection.Open();
-            var result = controlIdCommand.ExecuteReader();
+            _connection.Open();          
             if (result == null)
             {
                 var insertCommand = new SqlCommand(@"INSERT INTO 
@@ -51,15 +46,7 @@ namespace SqlSimple.Repositories
                 updateCommand.Parameters.AddWithValue("@Id", user.Id);
                 updateCommand.ExecuteNonQuery();
             }
-
-
-
-
-            
-
-            _connection.Close();
-
-
+           _connection.Close();
         }
         public User GetById(int id)
         {
@@ -87,9 +74,7 @@ namespace SqlSimple.Repositories
                 user.FullName = sqlReader.GetString(nameOrdinal);
                 user.Email = sqlReader.GetString(emailOrdinal);
             }
-
-            _connection.Close();
-
+           _connection.Close();
             return user;
         }
         public List<User> GetAll()
@@ -109,7 +94,6 @@ namespace SqlSimple.Repositories
                 var IdOrdinal = sqlReader.GetOrdinal("Id");
                 var nameOrdinal = sqlReader.GetOrdinal("Name");
                 var emailOrdinal = sqlReader.GetOrdinal("Email");
-
                 while (sqlReader.Read())
                 {
                     var user = new User();
@@ -121,7 +105,6 @@ namespace SqlSimple.Repositories
                     users.Add(user);
                 }
             }
-
             _connection.Close();
             return users;
         }

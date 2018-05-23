@@ -6,9 +6,11 @@ namespace SqlSimple.Models
     {
         public int Id { get; set; }
         public string Address { get; set; }
+        public User Owner { get; set; }
 
-        //TODO: Add User one to many house relation. Create the User just in here. 
-        //TODO: Add database related relation without droping the db. you should alter table. Do this in a separate SQL file. yes, developer needs to rin this files sequentialy    
-        //TODO: override ToString method to nicely show the house. Check User class for example
+        public override string ToString()
+        {
+            return $" Id = {Id} || Address = {Address} || User = {Owner}";
+        }               
     }
 }

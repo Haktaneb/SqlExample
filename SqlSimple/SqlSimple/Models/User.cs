@@ -7,7 +7,8 @@ namespace SqlSimple.Models
         public int Id { get; set; }
         public String FullName { get; set; }
         public String Email { get; set; }
-        
+        public String Phone { get; set; }
+        public int TC { get; set; }
         public override string ToString()
         {
             return $" Id = {Id} || Name = {FullName} || Email = {Email}";

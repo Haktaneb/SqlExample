@@ -7,10 +7,11 @@ namespace SqlSimple.Models
         public int Id { get; set; }
         public string Address { get; set; }
         public User Owner { get; set; }
+        public int UserId { get; set; }
 
         public override string ToString()
         {
-            return $" Id = {Id} || Address = {Address} || User = {Owner}";
+            return $" Id = {Id} || Address = {Address} || User = {Owner} || UserId = {UserId}";
         }               
     }
 }

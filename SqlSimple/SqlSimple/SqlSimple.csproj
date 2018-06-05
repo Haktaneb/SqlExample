@@ -110,6 +110,7 @@
   <ItemGroup>
     <Content Include="V2_SqlSampleCreateColums_UP.sql" />
     <Content Include="V1_SqlSampleCreateDB_UP.sql" />
+    <Content Include="V3_SqlSimpleCreateTC_UP.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
